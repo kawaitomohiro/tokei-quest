@@ -197,7 +197,6 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
 .seg button.on{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 3px 0 #0d1324}
 .setgrid{display:grid;grid-template-columns:1fr;gap:0 14px}
 @media (min-width:860px){.setgrid{grid-template-columns:1fr 1fr}}
-.xlink{display:inline-block;margin-top:10px;background:none;border:none;padding:6px 0;color:var(--sub);font-size:13px;text-decoration:underline;cursor:pointer;min-height:44px}
 .howto ol{padding-left:1.3em;margin:4px 0;line-height:1.7} .howto li{margin:4px 0}
 
 /* ===== モーダル・トースト ===== */
@@ -477,7 +476,7 @@ function ap(abs){ var mm=((abs%1440)+1440)%1440, h=Math.floor(mm/60), mi=mm%60; 
 function hm(h,m){ return h+'時'+pad2(m)+'分'; }
 
 function makeProblem(sid){
-  var h,m,sm,add,H,M,X,Y,a,sh,eh,em,sA,eA,dur,dH,dM;
+  var h,m,sm,add,H,M,V,Y,a,sh,eh,em,sA,eA,dur,dH,dM;
   switch(sid){
   case 'A1':
     h=ri(1,12); m=pick(m5(0,55));
@@ -506,26 +505,26 @@ function makeProblem(sid){
     return {mode:'num', q:it.q, ref:'1日＝24時間　1時間＝60分　1分＝60びょう', fields:[['a',it.u]], ans:{a:it.a},
       hint:{lines:['上の 青い わくを 見てみよう','こたえは ◻ '+it.u], blanks:[it.a], text:it.a+it.u}};
   case 'B2':
-    if(Math.random()<0.5){ X=ri(2,9); a=X*60;
-      return {mode:'num', q:X+'時間 ＝ □ 分', fields:[['a','分']], ans:{a:a},
-        hint:{lines:['1時間は ◻ 分','60 × '+X+' ＝ ◻ 分'], blanks:[60,a], text:a+'分'}}; }
-    X=ri(1,3); Y=pick(m5(5,55)); a=X*60+Y;
-    return {mode:'num', q:X+'時間'+Y+'分 ＝ □ 分', fields:[['a','分']], ans:{a:a},
-      hint:{lines:[X+'時間は ◻ 分',(X*60)+'分 ＋ '+Y+'分 ＝ ◻ 分'], blanks:[X*60,a], text:a+'分'}};
+    if(Math.random()<0.5){ V=ri(2,9); a=V*60;
+      return {mode:'num', q:V+'時間 ＝ □ 分', fields:[['a','分']], ans:{a:a},
+        hint:{lines:['1時間は ◻ 分','60 × '+V+' ＝ ◻ 分'], blanks:[60,a], text:a+'分'}}; }
+    V=ri(1,3); Y=pick(m5(5,55)); a=V*60+Y;
+    return {mode:'num', q:V+'時間'+Y+'分 ＝ □ 分', fields:[['a','分']], ans:{a:a},
+      hint:{lines:[V+'時間は ◻ 分',(V*60)+'分 ＋ '+Y+'分 ＝ ◻ 分'], blanks:[V*60,a], text:a+'分'}};
   case 'B3':
-    if(Math.random()<0.5){ X=ri(70,200); while(X%60===0) X=ri(70,200); var hh=Math.floor(X/60), mm=X%60;
-      return {mode:'num', q:X+'分 ＝ □時間 □分', fields:[['h','時間'],['m','分']], ans:{h:hh,m:mm},
-        hint:{lines:['60分で 1時間',X+'分 の 中に 60分は ◻ こ','のこりは ◻ 分'], blanks:[hh,mm], text:hh+'時間'+mm+'分'}}; }
-    X=ri(25,75); while(X%24===0) X=ri(25,75); var dd=Math.floor(X/24), h2=X%24;
-    return {mode:'num', q:X+'時間 ＝ □日 □時間', fields:[['d','日'],['h','時間']], ans:{d:dd,h:h2},
-      hint:{lines:['24時間で 1日',X+'時間 の 中に 24時間は ◻ こ','のこりは ◻ 時間'], blanks:[dd,h2], text:dd+'日'+h2+'時間'}};
+    if(Math.random()<0.5){ V=ri(70,200); while(V%60===0) V=ri(70,200); var hh=Math.floor(V/60), mm=V%60;
+      return {mode:'num', q:V+'分 ＝ □時間 □分', fields:[['h','時間'],['m','分']], ans:{h:hh,m:mm},
+        hint:{lines:['60分で 1時間',V+'分 の 中に 60分は ◻ こ','のこりは ◻ 分'], blanks:[hh,mm], text:hh+'時間'+mm+'分'}}; }
+    V=ri(25,75); while(V%24===0) V=ri(25,75); var dd=Math.floor(V/24), h2=V%24;
+    return {mode:'num', q:V+'時間 ＝ □日 □時間', fields:[['d','日'],['h','時間']], ans:{d:dd,h:h2},
+      hint:{lines:['24時間で 1日',V+'時間 の 中に 24時間は ◻ こ','のこりは ◻ 時間'], blanks:[dd,h2], text:dd+'日'+h2+'時間'}};
   case 'B4':
-    if(Math.random()<0.5){ X=ri(1,5); Y=pick(m5(5,55)); a=X*60+Y;
-      return {mode:'num', q:X+'分'+Y+'びょう ＝ □ びょう', fields:[['a','びょう']], ans:{a:a},
-        hint:{lines:['1分は 60びょう',X+'分は ◻ びょう',(X*60)+'びょう ＋ '+Y+'びょう ＝ ◻ びょう'], blanks:[X*60,a], text:a+'びょう'}}; }
-    X=ri(70,300); while(X%60===0) X=ri(70,300); var mm2=Math.floor(X/60), ss=X%60;
-    return {mode:'num', q:X+'びょう ＝ □分 □びょう', fields:[['m','分'],['s','びょう']], ans:{m:mm2,s:ss},
-      hint:{lines:['60びょうで 1分',X+'びょう の 中に 60びょうは ◻ こ','のこりは ◻ びょう'], blanks:[mm2,ss], text:mm2+'分'+ss+'びょう'}};
+    if(Math.random()<0.5){ V=ri(1,5); Y=pick(m5(5,55)); a=V*60+Y;
+      return {mode:'num', q:V+'分'+Y+'びょう ＝ □ びょう', fields:[['a','びょう']], ans:{a:a},
+        hint:{lines:['1分は 60びょう',V+'分は ◻ びょう',(V*60)+'びょう ＋ '+Y+'びょう ＝ ◻ びょう'], blanks:[V*60,a], text:a+'びょう'}}; }
+    V=ri(70,300); while(V%60===0) V=ri(70,300); var mm2=Math.floor(V/60), ss=V%60;
+    return {mode:'num', q:V+'びょう ＝ □分 □びょう', fields:[['m','分'],['s','びょう']], ans:{m:mm2,s:ss},
+      hint:{lines:['60びょうで 1分',V+'びょう の 中に 60びょうは ◻ こ','のこりは ◻ びょう'], blanks:[mm2,ss], text:mm2+'分'+ss+'びょう'}};
   case 'C1':
     h=ri(8,11); sm=pick(m5(0,40)); em=pick(m5(sm+5,55)); sA=h*60+sm; eA=h*60+em;
     return {mode:'dur', sA:sA, eA:eA, q:ap(sA)+' から '+ap(eA)+' まで 何分？', fields:[['m','分']], ans:{m:em-sm},
@@ -901,7 +900,7 @@ function renderSettings(){
     +'<li>1回 まちがえると「考え方」ボタンが 光り、2回で 考え方（かっこうめ）に 入ります。</li>'
     +'<li>メダル：金＝まちがいなし・考え方なし／銀＝まちがい3回まで／銅＝クリア。</li>'
     +'<li>ホーム画面に 追加すると、アプリのように ひらけます。</li></ol>'
-    +'<button class="xlink" id="xPost">大人の方へ：Xに 感想を 投稿する</button></div>'
+    +'</div>'
     +'<button class="btn ok" id="setDone">ホームに もどる</button>'
     +'</div>';
   L.querySelectorAll('.seg').forEach(function(sg){
@@ -915,12 +914,6 @@ function renderSettings(){
     ask('記録を ぜんぶ 消しますか？','この たんまつの スコア・メダル・しょうごう・とちゅうの 問題が 消えます。もとに もどせません。','消す','dark', function(){
       DB.score=0; DB.medals={}; DB.best={}; DB.resume=null; DB.last=null; saveDB(); toast('記録を 消しました');
     });
-  };
-  $('xPost').onclick=function(){
-    var text='とけいクエストを使ってみました！おすすめです👍 @rohimotoiwaka #GASアプリで学校をHappyに';
-    var url='https:'+'/'+'/x.com/intent/post?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
-    var xb=$('xPost'); if(xb._busy) return; xb._busy=true; setTimeout(function(){ xb._busy=false; }, 1500);
-    try{ window.open(url,'_blank','noopener'); }catch(e){}
   };
   $('setDone').onclick=leaveSettings;
 }
