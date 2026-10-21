@@ -77,7 +77,6 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
 .logo svg{width:40px;height:40px;flex:none}
 .logo h1{margin:0;font-size:clamp(20px,5.9vw,30px);color:var(--pri-t);letter-spacing:.04em;white-space:nowrap;font-weight:800;line-height:1.2}
 .tools{display:flex;gap:6px;align-items:center;flex:none}
-.tbtn{font-size:13px!important;color:var(--sub)}
 .status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;background:#fff;border-radius:var(--r);padding:10px 16px;box-shadow:var(--shadow);margin-bottom:14px}
 .badge{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:3px 14px;font-weight:800;font-size:.92rem;line-height:1.6}
 .status .num{font-weight:800}
@@ -187,7 +186,7 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
 .confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall 1.5s cubic-bezier(.3,.6,.5,1) forwards}
 @keyframes fall{to{transform:translateY(105vh) rotate(420deg)}}
 
-/* ===== 先生の設定 ===== */
+/* ===== せってい ===== */
 .set .phead h2{margin:0;font-size:1.1rem;flex:1}
 .sitem{background:#fff;border-radius:var(--r);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .sitem .sl{font-weight:800;margin-bottom:8px}
@@ -198,6 +197,7 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
 .seg button.on{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 3px 0 #0d1324}
 .setgrid{display:grid;grid-template-columns:1fr;gap:0 14px}
 @media (min-width:860px){.setgrid{grid-template-columns:1fr 1fr}}
+.xlink{display:inline-block;margin-top:10px;background:none;border:none;padding:6px 0;color:var(--sub);font-size:13px;text-decoration:underline;cursor:pointer;min-height:44px}
 .howto ol{padding-left:1.3em;margin:4px 0;line-height:1.7} .howto li{margin:4px 0}
 
 /* ===== モーダル・トースト ===== */
@@ -206,16 +206,6 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
 .mcard{background:#fff;border-radius:26px;padding:20px;width:100%;max-width:440px;max-height:92vh;overflow:auto;text-align:center;box-shadow:0 18px 48px rgba(0,0,0,.28);animation:pop .22s ease-out}
 .mcard h2{font-size:1.2rem;margin:2px 0 10px}
 .mcard p,.mcard ol{margin:6px 0 12px;text-align:left;line-height:1.7}
-.pin-dots{display:flex;justify-content:center;gap:12px;margin:10px 0 14px;min-height:22px}
-.pin-dot{width:20px;height:20px;border-radius:50%;border:3px solid #a9b0c4}
-.pin-dot.f{background:var(--ink);border-color:var(--ink)}
-.pin-dot.err{border-color:#b3261e;animation:shake .32s}
-.pin-pad{display:grid;grid-template-columns:repeat(3,70px);gap:12px;justify-content:center}
-.pin-key{width:70px;height:70px;border-radius:50%;border:2px solid var(--line);background:var(--cream);font-size:1.5rem;font-weight:800;cursor:pointer;box-shadow:0 3px 0 var(--line);color:var(--ink)}
-.pin-key:active{transform:translateY(3px);box-shadow:none}
-.pin-key.act{font-size:.8rem;background:#fff}
-.pin-msg{min-height:1.6em;margin-top:10px;font-weight:800;font-size:.9rem;color:var(--sub)}
-.pin-msg.err{color:#b3261e}
 #toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;font-weight:800;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:calc(100vw - 32px);text-align:center;line-height:1.5}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -238,7 +228,7 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
       </div>
       <div class="tools">
         <button class="ibtn fsBtn" aria-label="全画面"><svg viewBox="0 0 24 24"><path class="fsIcon" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="ibtn tbtn" id="teacherBtn" aria-label="先生の設定">先生</button>
+        <button class="ibtn" id="setBtn" aria-label="せってい"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8M18.5 18.5l-1.8-1.8M7.3 7.3 5.5 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
       </div>
     </div>
     <div class="status" id="status"></div>
@@ -282,11 +272,11 @@ button{font-family:inherit;color:inherit;letter-spacing:inherit;-webkit-user-sel
     </div>
   </section>
 
-  <!-- ===== 先生の設定 ===== -->
-  <section class="screen set" id="s-set" aria-label="先生の設定">
+  <!-- ===== せってい ===== -->
+  <section class="screen set" id="s-set" aria-label="せってい">
     <div class="phead"><div class="prow">
       <button class="ibtn" id="setBack">← もどる</button>
-      <h2>先生の設定（この たんまつ）</h2>
+      <h2>せってい</h2>
       <button class="ibtn fsBtn" aria-label="全画面"><svg viewBox="0 0 24 24"><path class="fsIcon" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div></div>
     <div class="setgrid" id="setList"></div>
@@ -305,7 +295,7 @@ var KEY = 'tokeiQuest.v1';
 var canStore = (function(){ try{ var k='__tq_test'; localStorage.setItem(k,'1'); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
 var DEF_SET = { unlock:'order', count:10, autoHint:true, sound:true, font:'m', motion:'auto' };
 var DB = loadDB();
-function freshDB(){ return { v:1, score:0, medals:{}, best:{}, resume:null, last:null, set:copy(DEF_SET), pin:null }; }
+function freshDB(){ return { v:1, score:0, medals:{}, best:{}, resume:null, last:null, set:copy(DEF_SET) }; }
 function copy(o){ return JSON.parse(JSON.stringify(o)); }
 function loadDB(){
   var d = null;
@@ -316,6 +306,7 @@ function loadDB(){
   for(var k2 in DEF_SET){ if(!(k2 in d.set)) d.set[k2] = DEF_SET[k2]; }
   if(!d.medals || typeof d.medals!=='object') d.medals = {};
   d.score = parseInt(d.score,10) || 0;
+  if('pin' in d){ delete d.pin; d._cleaned=true; }
   return d;
 }
 function saveDB(){ if(!canStore) return; try{ localStorage.setItem(KEY, JSON.stringify(DB)); }catch(e){} }
@@ -884,68 +875,6 @@ function confetti(){
   document.body.appendChild(box); setTimeout(function(){ box.remove(); }, 2100);
 }
 
-/*==================== 先生の合言葉（数字キーパッド） ====================*/
-function hashPin(pin, salt){
-  // 端末の中だけで照合するための ハッシュ（合言葉そのものは保存しない）
-  var str = salt+':'+pin, h1=0xdeadbeef, h2=0x41c6ce57;
-  for(var r=0;r<500;r++){
-    for(var i=0;i<str.length;i++){ var c=str.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
-    h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
-    h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
-    str = (h2>>>0).toString(16)+(h1>>>0).toString(16)+str.length;
-  }
-  return (h2>>>0).toString(16)+(h1>>>0).toString(16);
-}
-function pinDialog(opts, done){
-  var MIN=4, MAX=8, pin='';
-  function paint(msg, err){
-    var n=Math.max(MIN,pin.length), dots='';
-    for(var i=0;i<n;i++) dots+='<span class="pin-dot'+(i<pin.length?' f':'')+(err?' err':'')+'"></span>';
-    var keys='';
-    ['1','2','3','4','5','6','7','8','9'].forEach(function(k){ keys+='<button class="pin-key" data-n="'+k+'">'+k+'</button>'; });
-    keys+='<button class="pin-key act" data-a="cancel">やめる</button><button class="pin-key" data-n="0">0</button><button class="pin-key act" data-a="del" aria-label="1文字けす">⌫</button>';
-    $('mcard').innerHTML='<h2>'+opts.title+'</h2><div style="font-size:.9rem;color:var(--sub)">'+opts.sub+'</div>'
-      +'<div class="pin-dots" aria-label="'+pin.length+'けた 入力ずみ">'+dots+'</div><div class="pin-pad">'+keys+'</div>'
-      +'<button class="btn dark" data-a="ok" '+(pin.length>=MIN?'':'disabled')+'>'+(opts.ok||'決定')+'</button>'
-      +'<div class="pin-msg'+(err?' err':'')+'" aria-live="polite">'+(msg||('数字 '+MIN+'〜'+MAX+'けた'))+'</div>';
-    $('mcard').querySelectorAll('button').forEach(function(b){ b.onclick=function(){ press(b.dataset.a, b.dataset.n); }; });
-  }
-  function press(a, n){
-    if(n!=null){ if(pin.length<MAX) pin+=n; paint(''); return; }
-    if(a==='del'){ pin=pin.slice(0,-1); paint(''); return; }
-    if(a==='cancel'){ closeModal(); return; }
-    if(a==='ok'){
-      if(pin.length<MIN) return;
-      var r = opts.check ? opts.check(pin) : true;
-      if(r===true){ var v=pin; closeModal(); done(v); }
-      else { pin=''; paint(r, true); }
-    }
-  }
-  openModal('', function(e){
-    if(/^[0-9]$/.test(e.key)){ e.preventDefault(); press(null,e.key); }
-    else if(e.key==='Backspace'){ e.preventDefault(); press('del'); }
-    else if(e.key==='Enter'){ e.preventDefault(); press('ok'); }
-    else if(e.key==='Escape'){ e.preventDefault(); press('cancel'); }
-  });
-  paint('');
-}
-function setNewPin(title, after){
-  pinDialog({title:title, sub:'先生だけが 知っている 数字を 決めてください（この たんまつに 記録します）', ok:'つぎへ'}, function(p1){
-    pinDialog({title:'もう一度 入れてください', sub:'たしかめのため、同じ 数字を もう一度', ok:'決定',
-      check:function(p2){ return p2===p1 ? true : '1回目と あいません。もう一度 入れてください'; }}, function(){
-      var salt = Math.random().toString(36).slice(2)+Date.now().toString(36);
-      DB.pin = {salt:salt, h:hashPin(p1,salt)}; saveDB();
-      toast(canStore ? '合言葉を 決めました' : '合言葉を 決めました（この たんまつでは 記録が のこりません）');
-      after && after();
-    });
-  });
-}
-function teacherEnter(){
-  if(!DB.pin || !DB.pin.h){ setNewPin('はじめに 合言葉を 決めます', openSettings); return; }
-  pinDialog({title:'先生の 合言葉', sub:'設定を ひらくには 合言葉を 入れてください', ok:'ひらく',
-    check:function(p){ return hashPin(p, DB.pin.salt)===DB.pin.h ? true : '合言葉が あいません。もう一度 入れてください'; }}, openSettings);
-}
-
 /*==================== 設定画面 ====================*/
 function seg(key, opts){
   var h='<div class="seg" data-key="'+key+'">';
@@ -964,17 +893,16 @@ function renderSettings(){
     +'<div class="sitem"><div class="sl">文字の 大きさ</div>'+seg('font',[['s','小'],['m','中'],['l','大']])+'</div>'
     +'<div class="sitem"><div class="sl">うごき</div>'+seg('motion',[['auto','ふつう'],['less','へらす']])+'<div class="sd">「ふつう」でも、たんまつで「視差効果を減らす」が オンなら へります。</div></div>'
     +'</div><div>'
+    +'<div class="sitem"><div class="sl">この たんまつの 記録</div><button class="btn dark" id="wipe">記録を ぜんぶ 消す</button><div class="sd">スコア・メダル・しょうごう・とちゅうの 問題を 消します。せっていは のこります。</div></div>'
     +'<div class="sitem howto"><div class="sl">使い方</div><ol>'
     +'<li>URLを ひらくだけで 始まります。名前の 登録は ありません。</li>'
     +'<li>記録（スコア・メダル・しょうごう・とちゅうの 問題）は、この たんまつの ブラウザの 中だけに のこります。どこにも 送りません。</li>'
-    +'<li>3つの コース・13の ステップ。1ステップ 10問（設定で かえられます）。まちがえた 問題は クリアまでに もう一度 とけます。</li>'
+    +'<li>3つの コース・13の ステップ。1ステップ 10問（せっていで かえられます）。まちがえた 問題は クリアまでに もう一度 とけます。</li>'
     +'<li>1回 まちがえると「考え方」ボタンが 光り、2回で 考え方（かっこうめ）に 入ります。</li>'
     +'<li>メダル：金＝まちがいなし・考え方なし／銀＝まちがい3回まで／銅＝クリア。</li>'
-    +'<li>ホーム画面に 追加すると、アプリのように ひらけます。</li></ol></div>'
-    +'<div class="sitem"><div class="sl">合言葉</div><button class="btn ghost" id="chgPin">合言葉を かえる</button><div class="sd">わすれたときは、ブラウザの この サイトの データを 消すと 最初から 決め直せます（記録も 消えます）。</div></div>'
-    +'<div class="sitem"><div class="sl">この たんまつの 記録</div><button class="btn dark" id="wipe">記録を ぜんぶ 消す</button><div class="sd">スコア・メダル・しょうごう・とちゅうの 問題を 消します。設定と 合言葉は のこります。</div></div>'
-    +'<div class="sitem"><div class="sl">感想を とどける</div><button class="btn" id="xPost">Xに 感想を 投稿する</button><div class="sd">新しい タブで Xの 投稿画面が ひらきます。</div></div>'
-    +'<button class="btn ok" id="setDone">子どもの 画面に もどる</button>'
+    +'<li>ホーム画面に 追加すると、アプリのように ひらけます。</li></ol>'
+    +'<button class="xlink" id="xPost">大人の方へ：Xに 感想を 投稿する</button></div>'
+    +'<button class="btn ok" id="setDone">ホームに もどる</button>'
     +'</div>';
   L.querySelectorAll('.seg').forEach(function(sg){
     var key=sg.dataset.key;
@@ -983,7 +911,6 @@ function renderSettings(){
       DB.set[key]=v; saveDB(); applyLook(); renderSettings(); SFX.tap();
     }; });
   });
-  $('chgPin').onclick=function(){ setNewPin('あたらしい 合言葉', function(){}); };
   $('wipe').onclick=function(){
     ask('記録を ぜんぶ 消しますか？','この たんまつの スコア・メダル・しょうごう・とちゅうの 問題が 消えます。もとに もどせません。','消す','dark', function(){
       DB.score=0; DB.medals={}; DB.best={}; DB.resume=null; DB.last=null; saveDB(); toast('記録を 消しました');
@@ -992,11 +919,12 @@ function renderSettings(){
   $('xPost').onclick=function(){
     var text='とけいクエストを使ってみました！おすすめです👍 @rohimotoiwaka #GASアプリで学校をHappyに';
     var url='https:'+'/'+'/x.com/intent/post?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
+    var xb=$('xPost'); if(xb._busy) return; xb._busy=true; setTimeout(function(){ xb._busy=false; }, 1500);
     try{ window.open(url,'_blank','noopener'); }catch(e){}
   };
   $('setDone').onclick=leaveSettings;
 }
-function leaveSettings(){ renderHome(); show('home'); } // 先生画面を出たら子どものトップへ
+function leaveSettings(){ renderHome(); show('home'); }
 
 /*==================== 全画面 ====================*/
 // iPad・Android・Chromebook はブラウザの全画面。iPhone は全画面のしくみが無いので「ホーム画面に追加」を案内する
@@ -1061,7 +989,8 @@ document.addEventListener('keydown', function(e){
 });
 
 /*==================== はじまり ====================*/
-$('teacherBtn').onclick = teacherEnter;
+$('setBtn').onclick = openSettings;
+if(DB._cleaned){ delete DB._cleaned; saveDB(); }
 $('setBack').onclick = leaveSettings;
 $('playBack').onclick = function(){ GEN++; if(S && !S.queue.length && !S.finished){ finishStep(); return; } if(S){ DB.resume = S.queue.length ? S : null; saveDB(); } renderHome(); show('home'); };
 $('modal').addEventListener('click', function(e){ if(e.target===$('modal') && $('mcard').querySelector('#mNo')) closeModal(); });
@@ -1075,7 +1004,7 @@ document.querySelectorAll('.fsz [data-fs]').forEach(function(b){ b.onclick=funct
 $('fsCycle').onclick=function(){ setFont(FS[(FS.indexOf(DB.set.font||'m')+1)%3]); toast('文字の 大きさ：'+FSL[DB.set.font]); };
 paintFs(); paintFont();
 // ボタンを おしたら 小さな 音（手ごたえ）
-document.addEventListener('pointerdown', function(e){ var b=e.target.closest && e.target.closest('.btn,.key,.tab,.tile,.ibtn,.seg button,.fsz button,.pin-key,.field,.blank'); if(b && !b.disabled) SFX.tap(); }, true);
+document.addEventListener('pointerdown', function(e){ var b=e.target.closest && e.target.closest('.btn,.key,.tab,.tile,.ibtn,.seg button,.fsz button,.field,.blank'); if(b && !b.disabled) SFX.tap(); }, true);
 // はじめの画面：初回は2.6秒、2回目からは1.5秒。タップ・キーで すぐ進む
 (function(){
   var sp=$('splash'); if(!sp) return;
